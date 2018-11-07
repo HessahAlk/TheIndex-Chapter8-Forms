@@ -12,6 +12,17 @@ class AuthorForm extends Component {
       imageUrl: "",
       books: [] //leave this empty
     };
+    this.submitAuthor = this.submitAuthor.bind(this);
+    this.onTextchange = this.onTextchange.bind(this);
+  }
+
+  submitAuthor(event) {
+  event.preventDefault();
+  this.props.onPostAuthor(this.state);
+}
+
+  onTextchange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -21,14 +32,14 @@ class AuthorForm extends Component {
           <div className="input-group-prepend">
             <span className="input-group-text">First Name</span>
           </div>
-          <input type="text" className="form-control" name="first_name" />
+          <input type="text" className="form-control" name="first_name" onChange={this.onTextchange.bind(this)} />
         </div>
 
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Last Name</span>
           </div>
-          <input type="text" className="form-control" name="last_name" />
+          <input type="text" className="form-control" name="last_name" onChange={this.onTextchange.bind(this)} />
         </div>
 
         <div className="input-group mb-3">

@@ -10,13 +10,29 @@ class BookForm extends Component {
       title: "",
       color: ""
     };
+    this.onTextChange = this.onTextChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onTextChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.postBook(this.state, this.props.authorID);
   }
 
   render() {
     return (
-      <form>
-        <input type="text" name="title" placeholder="Book Name" />
-        <select name="color">
+      <form onSubmit={this.onSubmit}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Book Name"
+          onChange={this.onTextChange}
+        />
+        <select name="color" onChange={this.onTextChange}>
           <option value="">Color</option>
           <option value="red">Red</option>
           <option value="blue">Blue</option>
